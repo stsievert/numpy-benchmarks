@@ -1,33 +1,34 @@
 from __future__ import division
 from pylab import *
 import sys
-
 import timeit
 
+MULTIPLIER = 1.0
+
 def SVDTest():
-    N = 1e3
+    N = 1e3 * MULTIPLIER
     u, s, v = svd(randn(N,N))
 def QRTest():
-    N = 2e3
+    N = 2e3 * MULTIPLIER
     q, r = qr(randn(N,N))
 def InverseTest():
-    N = 2e3
+    N = 2e3 * MULTIPLIER
     A = randn(N,N)
     x = randn(N)
     sol = inv(A).dot(x)
 def DeterminantTest():
-    N = 3.0e3
+    N = 3.0e3 * MULTIPLIER
     A = randn(N,N)
     d = det(A)
 def NormTest():
-    N = 5e3
+    N = 5e3 * MULTIPLIER
     A = randn(N,N)
     n = norm(A)
 def EigTest():
-    N = 8e2
+    N = 8e2 * MULTIPLIER
     e = eig(randn(N,N))
 def DotTest():
-    N = 2e3
+    N = 2e3 * MULTIPLIER
     A = randn(N,N)
     B = randn(N,N)
     C = A.dot(B)
