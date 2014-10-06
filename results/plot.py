@@ -1,16 +1,17 @@
-
 from __future__ import division
 from pylab import *
 from pandas import read_csv
 
 x = read_csv('times.csv')
 
-imac = ones(x.iMac.size)
-air = asarray(x.Air) / imac
-pro = asarray(x.Pro) / imac
+imac11 = ones(x.iMac11.size)
+imac12 = asarray(x.iMac12) / imac11
+air = asarray(x.Air) / imac11
+pro = asarray(x.Pro) / imac11
 names = x.Function
 
-imac = hstack((imac, [1]))
+imac11 = hstack((imac11, [1]))
+imac12 = hstack(([mean(imac12)], imac12))
 air = hstack(([mean(air)], air))
 pro = hstack(([mean(pro)], pro))
 names = hstack((["\\textbf{Mean}"], names, [""]))
@@ -18,10 +19,12 @@ names = hstack((["\\textbf{Mean}"], names, [""]))
 SIZE = (3*3, 2*3)
 figure(figsize=SIZE)
 ax = gca()
-i = arange(1, imac.shape[0]+2)
-plot(imac , 'go-' , label='2011 iMac')
-plot(air  , 'bo'  , label='2012 Air')
-plot( pro  , 'ro'  , label='2014 Pro')
+i = arange(1, imac11.shape[0]+2)
+
+plot(imac11 , 'go-' , label='2011 iMac')
+plot(imac12 , 'mo:'  , label='2012 iMac')
+plot(air    , 'bo:'  , label='2012 Air')
+plot(pro    , 'ro:'  , label='2014 Pro')
 
 grid()
 legend(loc='best')
